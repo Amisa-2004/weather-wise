@@ -1013,8 +1013,13 @@ def generate_climate_summary(temp_trend, precip_trend, temp_change, precip_chang
 
 if __name__ == '__main__':
     print('🚀 Starting WeatherWise Flask API...')
-    # Test Meteomatics connection
-    test_meteomatics_connection()
-    print('📍 API will be available at: http://localhost:5000')
-    print('🔍 Test it: http://localhost:5000/api/health')
-    app.run(debug=True, port=5000)
+    
+    # Only test connection in development
+    if os.getenv('FLASK_ENV') != 'production':
+        test_meteomatics_connection()
+    
+    port = int(os.getenv('PORT', 5000))
+    debug = os.getenv('FLASK_ENV') != 'production'
+    
+    print(f'📍 API will be available on port: {port}')
+    app.run(debug=debug, host='0.0.0.0', port=port)
