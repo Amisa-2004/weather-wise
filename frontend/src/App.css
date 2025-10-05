@@ -1122,3 +1122,273 @@ button:disabled {
   }
 }
 
+/* Date Picker Styling */
+.date-picker-input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: all 0.3s;
+  background: white;
+  cursor: pointer;
+}
+
+.date-picker-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker {
+  font-family: inherit;
+  border: 2px solid #667eea;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.react-datepicker__header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  padding-top: 12px;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  color: white;
+  font-weight: 600;
+}
+
+.react-datepicker__day {
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.react-datepicker__day:hover {
+  background: #e0e7ff;
+  color: #667eea;
+}
+
+.react-datepicker__day--selected {
+  background: #667eea !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+.react-datepicker__day--keyboard-selected {
+  background: #c7d2fe;
+  color: #667eea;
+}
+
+.react-datepicker__day--disabled {
+  color: #d1d5db;
+  cursor: not-allowed;
+}
+
+.react-datepicker__month-select,
+.react-datepicker__year-select {
+  background: white;
+  border: 2px solid #667eea;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-weight: 600;
+  color: #667eea;
+  cursor: pointer;
+}
+
+.react-datepicker__navigation {
+  top: 12px;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: white;
+  border-width: 2px 2px 0 0;
+}
+
+/* Climate Trends Section */
+.climate-trends-section {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.climate-trends-section h2 {
+  font-size: 1.8em;
+  color: #1f2937;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.climate-subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 30px;
+  font-size: 1em;
+}
+
+.trends-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.trend-card {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  border: 3px solid transparent;
+  transition: all 0.3s;
+}
+
+.trend-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.trend-card.increasing {
+  border-color: #ef4444;
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+}
+
+.trend-card.decreasing {
+  border-color: #3b82f6;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+.trend-card.stable {
+  border-color: #10b981;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+}
+
+.trend-icon {
+  font-size: 3.5em;
+  margin-bottom: 15px;
+}
+
+.trend-card h3 {
+  font-size: 1.3em;
+  color: #1f2937;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.trend-status {
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.trend-card.increasing .trend-status {
+  background: #ef4444;
+  color: white;
+}
+
+.trend-card.decreasing .trend-status {
+  background: #3b82f6;
+  color: white;
+}
+
+.trend-card.stable .trend-status {
+  background: #10b981;
+  color: white;
+}
+
+.trend-value {
+  font-size: 3em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.trend-card.increasing .trend-value {
+  color: #ef4444;
+}
+
+.trend-card.decreasing .trend-value {
+  color: #3b82f6;
+}
+
+.trend-card.stable .trend-value {
+  color: #10b981;
+}
+
+.trend-label {
+  font-size: 0.9em;
+  color: #6b7280;
+  margin-bottom: 15px;
+}
+
+.trend-description {
+  font-size: 0.95em;
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+}
+
+.trend-rate {
+  font-size: 0.85em;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.climate-summary-box {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  border-left: 5px solid #667eea;
+  border-radius: 12px;
+  padding: 25px;
+}
+
+.climate-summary-box h3 {
+  font-size: 1.3em;
+  color: #1f2937;
+  margin-bottom: 20px;
+}
+
+.climate-summary-item {
+  padding: 12px;
+  margin-bottom: 10px;
+  background: white;
+  border-radius: 8px;
+  color: #374151;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.climate-note {
+  margin-top: 20px;
+  padding: 15px;
+  background: #fef3c7;
+  border-left: 4px solid #f59e0b;
+  border-radius: 8px;
+  font-size: 0.9em;
+  color: #78350f;
+  line-height: 1.6;
+}
+
+.climate-note strong {
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .trends-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .trend-value {
+    font-size: 2.5em;
+  }
+}

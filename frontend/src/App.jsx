@@ -1,4 +1,6 @@
 import axios from 'axios'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import { useState } from 'react'
 import './App.css'
 import MapSelector from './MapSelector'
@@ -235,15 +237,24 @@ function App() {
             </div>
 
             {mode === 'planning' && (
-              <div className="form-group">
-                <label>Target Date:</label>
-                <input 
-                  type="date" 
-                  value={targetDate} 
-                  onChange={(e) => setTargetDate(e.target.value)}
-                  min={new Date().toISOString().split('T')[0]}
-                />
-              </div>
+            <div className="form-group">
+              <label>Target Date:</label>
+              <DatePicker
+              selected={new Date(targetDate)}
+              onChange={(date) => {
+                const formatted = date.toISOString().split('T')[0]
+                setTargetDate(formatted)
+              }}
+              minDate={new Date()}
+              maxDate={new Date(new Date().setFullYear(new Date().getFullYear() + 2))}
+              dateFormat="MMMM d, yyyy"
+              className="date-picker-input"
+              placeholderText="Select target date"
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
+              />
+            </div>
             )}
           </div>
 
@@ -548,6 +559,78 @@ function App() {
                 ))}
               </div>
             </div>
+            
+            {/* Climate Trends Analysis */}
+            {historicalData.climate_trends && (
+              <div className="climate-trends-section">
+                <h2>📈 Climate Trend Analysis</h2>
+                <p className="climate-subtitle">Long-term patterns observed in NASA satellite data</p>
+                
+                <div className="trends-grid">
+                  {/* Temperature Trend */}
+                  <div className={`trend-card ${historicalData.climate_trends.temperature.trend.toLowerCase()}`}>
+                    <div className="trend-icon">
+                      {historicalData.climate_trends.temperature.trend === 'INCREASING' ? '🌡️↗️' : 
+                       historicalData.climate_trends.temperature.trend === 'DECREASING' ? '🌡️↘️' : '🌡️➡️'}
+                    </div>
+                    <h3>Temperature Trend</h3>
+                    <div className="trend-status">
+                      {historicalData.climate_trends.temperature.trend}
+                    </div>
+                    <div className="trend-value">
+                      {historicalData.climate_trends.temperature.total_change > 0 ? '+' : ''}
+                      {historicalData.climate_trends.temperature.total_change}°C
+                    </div>
+                    <div className="trend-label">over 10 years</div>
+                    <div className="trend-description">
+                      {historicalData.climate_trends.temperature.description}
+                    </div>
+                    <div className="trend-rate">
+                      {historicalData.climate_trends.temperature.change_per_decade > 0 ? '+' : ''}
+                      {historicalData.climate_trends.temperature.change_per_decade}°C per decade
+                    </div>
+                  </div>
+
+                  {/* Precipitation Trend */}
+                  <div className={`trend-card ${historicalData.climate_trends.precipitation.trend.toLowerCase()}`}>
+                    <div className="trend-icon">
+                      {historicalData.climate_trends.precipitation.trend === 'INCREASING' ? '💧↗️' : 
+                       historicalData.climate_trends.precipitation.trend === 'DECREASING' ? '💧↘️' : '💧➡️'}
+                    </div>
+                    <h3>Precipitation Trend</h3>
+                    <div className="trend-status">
+                      {historicalData.climate_trends.precipitation.trend}
+                    </div>
+                    <div className="trend-value">
+                      {historicalData.climate_trends.precipitation.total_change > 0 ? '+' : ''}
+                      {historicalData.climate_trends.precipitation.total_change}mm
+                    </div>
+                    <div className="trend-label">over 10 years</div>
+                    <div className="trend-description">
+                      {historicalData.climate_trends.precipitation.description}
+                    </div>
+                    <div className="trend-rate">
+                      {historicalData.climate_trends.precipitation.change_per_decade > 0 ? '+' : ''}
+                      {historicalData.climate_trends.precipitation.change_per_decade}mm per decade
+                    </div>
+                  </div>
+                </div>
+
+                {/* Climate Summary */}
+                <div className="climate-summary-box">
+                  <h3>🌍 Climate Adaptation Insights</h3>
+                  {historicalData.climate_trends.summary.map((item, idx) => (
+                    <div key={idx} className="climate-summary-item">
+                      {item}
+                    </div>
+                  ))}
+                  <div className="climate-note">
+                    <strong>Note:</strong> Trends based on {historicalData.statistics.total_years_analyzed} years of NASA satellite observations. 
+                    Climate patterns are evolving - use these trends for long-term adaptation planning.
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div className="historical-timeline">
               <h3>📈 Historical Data (Last 10 Years)</h3>
