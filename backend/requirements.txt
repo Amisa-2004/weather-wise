@@ -6,3 +6,4 @@ flask_cors
 io
 os
 requests
+gunicorn==21.2.0
