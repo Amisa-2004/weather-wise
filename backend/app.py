@@ -481,6 +481,7 @@ def generate_historical_analysis(lat, lon, target_date, activity, crop):
             is_summer
         ),
         'extreme_events': extreme_events,
+        'climate_trends': calculate_climate_trends(historical_years),
         'data_sources': [
             'NASA GPM IMERG (Historical Precipitation - 20 years)',
             'NASA SMAP (Historical Soil Moisture)',
@@ -922,6 +923,93 @@ def download_data():
             'content': analysis_data,
             'filename': filename
         })
+
+def calculate_climate_trends(historical_data):
+    """
+    Analyze climate trends over the historical period
+    Addresses NASA requirement: "data capture trends too"
+    """
+    if len(historical_data) < 5:
+        return None
+    
+    years = [d['year'] for d in historical_data]
+    temps = [d['temperature_c'] for d in historical_data]
+    precips = [d['precipitation_mm'] for d in historical_data]
+    
+    # Simple linear trend calculation
+    n = len(years)
+    
+    # Temperature trend
+    temp_slope = (n * sum(y*t for y,t in zip(years, temps)) - sum(years) * sum(temps)) / \
+                 (n * sum(y*y for y in years) - sum(years)**2)
+    
+    temp_change = temp_slope * (years[-1] - years[0])
+    
+    # Precipitation trend
+    precip_slope = (n * sum(y*p for y,p in zip(years, precips)) - sum(years) * sum(precips)) / \
+                   (n * sum(y*y for y in years) - sum(years)**2)
+    
+    precip_change = precip_slope * (years[-1] - years[0])
+    
+    # Determine trend significance
+    temp_trend = 'INCREASING' if temp_slope > 0.1 else 'DECREASING' if temp_slope < -0.1 else 'STABLE'
+    precip_trend = 'INCREASING' if precip_slope > 1 else 'DECREASING' if precip_slope < -1 else 'STABLE'
+    
+    return {
+        'temperature': {
+            'trend': temp_trend,
+            'change_per_decade': round(temp_slope * 10, 2),
+            'total_change': round(temp_change, 2),
+            'description': generate_temp_trend_description(temp_trend, temp_change)
+        },
+        'precipitation': {
+            'trend': precip_trend,
+            'change_per_decade': round(precip_slope * 10, 1),
+            'total_change': round(precip_change, 1),
+            'description': generate_precip_trend_description(precip_trend, precip_change)
+        },
+        'summary': generate_climate_summary(temp_trend, precip_trend, temp_change, precip_change)
+    }
+
+
+def generate_temp_trend_description(trend, change):
+    """Generate human-readable temperature trend description"""
+    if trend == 'INCREASING':
+        return f'Temperatures have risen by {abs(change):.1f}°C over the past decade - warmer conditions becoming more common'
+    elif trend == 'DECREASING':
+        return f'Temperatures have cooled by {abs(change):.1f}°C over the past decade - cooler conditions more frequent'
+    else:
+        return 'Temperatures have remained relatively stable over the past decade'
+
+
+def generate_precip_trend_description(trend, change):
+    """Generate human-readable precipitation trend description"""
+    if trend == 'INCREASING':
+        return f'Rainfall has increased by {abs(change):.1f}mm over the past decade - wetter conditions expected'
+    elif trend == 'DECREASING':
+        return f'Rainfall has decreased by {abs(change):.1f}mm over the past decade - drier conditions expected'
+    else:
+        return 'Rainfall patterns have remained relatively stable over the past decade'
+
+
+def generate_climate_summary(temp_trend, precip_trend, temp_change, precip_change):
+    """Generate overall climate trend summary"""
+    summaries = []
+    
+    if temp_trend == 'INCREASING' and abs(temp_change) > 0.5:
+        summaries.append('🌡️ Climate warming trend detected - consider heat adaptation strategies')
+    elif temp_trend == 'DECREASING' and abs(temp_change) > 0.5:
+        summaries.append('❄️ Cooling trend observed - adjust cold weather preparations')
+    
+    if precip_trend == 'INCREASING' and abs(precip_change) > 5:
+        summaries.append('💧 Increasing precipitation pattern - drainage and wet weather planning important')
+    elif precip_trend == 'DECREASING' and abs(precip_change) > 5:
+        summaries.append('☀️ Decreasing precipitation trend - water conservation and drought preparedness advised')
+    
+    if not summaries:
+        summaries.append('📊 Climate conditions relatively stable - historical patterns remain reliable')
+    
+    return summaries
 
 if __name__ == '__main__':
     print('🚀 Starting WeatherWise Flask API...')
