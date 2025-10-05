@@ -117,4 +117,4 @@ This will open your app in the browser at: http://localhost:3000
 ## 📝 License
 MIT License - Built for NASA Space Apps Challenge 2025
 ---
-**Built with ❤️ for NASA Space Apps Challenge 2025*
+*Built with ❤️ for NASA Space Apps Challenge 2025*
