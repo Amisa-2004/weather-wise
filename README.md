@@ -1,21 +1,69 @@
-# weather-wise
-NASA-Powered Weather Decision Intelligence <br />
-Agriculture • Outdoor Events • Construction • Sports • Tourism
-# How to run the app Locally
-Copy this repository into your local device.
-Create a file named ".env" into the main folder.
-Write the following and save it:
-```bash
-MY_APP_USERNAME=actual_user_name #In the groupchat
-MY_APP_PASSWORD=password #In the groupchat
-```
-## ⚙️ Prerequisites
+# WeatherWise - NASA Space Apps Challenge 2025
+
+## Will It Rain On My Parade?
+
+[![NASA Space Apps 2025](https://img.shields.io/badge/NASA%20Space%20Apps-2025-blue)](https://www.spaceappschallenge.org/)
+
+WeatherWise is a dual-mode weather intelligence platform that transforms NASA Earth observation data into actionable probability-based forecasts for long-term planning and short-term decision-making.
+
+## 🎥 Demo Video
+[Link to your video - add after upload]
+
+## 🚀 Live Demo
+[Link to deployed app - if you deploy]
+
+## 📊 Features
+
+- **Planning Mode**: 20+ years of NASA satellite data analysis for long-term planning
+- **Forecast Mode**: Precise 7-day forecasts for immediate decisions
+- **Interactive Map**: Click-to-select location interface
+- **Extreme Events Analysis**: Heat waves, heavy rainfall, dangerous winds
+- **Climate Trends**: Long-term pattern analysis from NASA observations
+- **Visual Charts**: Interactive probability and trend visualizations
+- **Download Reports**: Export analysis in CSV and JSON formats
+
+## 🛰️ Data Sources
+
+- NASA GPM IMERG (Global Precipitation Measurement)
+- NASA SMAP (Soil Moisture Active Passive)
+- NASA MODIS (Atmospheric Conditions)
+- Meteomatics Weather API (NASA data processing partner)
+
+## 🛠️ Technology Stack
+
+**Frontend:**
+- React 18 + Vite
+- Tailwind CSS
+- Recharts (data visualization)
+- Leaflet.js (interactive maps)
+- React DatePicker
+
+**Backend:**
+- Python 3.11 + Flask
+- Meteomatics API integration
+- Real-time NASA data processing
+
+## 🏃 Quick Start
+
+### Prerequisites
+- Node.js 18+
+- Python 3.11+
+- Meteomatics API credentials
+
+### Installation
+
+**⚙️ Prerequisites**
 
 Make sure you have the following installed:
 
 - [Python 3.8+](https://www.python.org/downloads/)
 - [Node.js + npm](https://nodejs.org/)
 
+1. Clone the repository
+```bash
+git clone https://github.com/Amisa-2004/weatherwise-nasa.git
+cd weatherwise-nasa
+```
 ---
 **BACKEND**
 1. Your path should look like: **C:\Users\Desktop\WeatherWise\backend>**
@@ -29,7 +77,12 @@ venv\Scripts\activate         # On Windows
 ```bash
 pip install -r requirements.txt
 ```
-4. Run the flask server:
+4. Add meteomatics credentials
+```bash
+METEOMATICS_USERNAME = "your_username"
+METEOMATICS_PASSWORD = "your_password"
+```
+5. Run the flask server:
 ```bash
 flask run
 ```
@@ -53,3 +106,15 @@ npm install
 npm run dev
 ```
 This will open your app in the browser at: http://localhost:3000
+
+## 📖 Documentation
+- Architechture Overview: https://github.com/Amisa-2004/weather-wise/blob/main/docs/architecture.md
+- NASA Data Sources: https://github.com/Amisa-2004/weather-wise/blob/main/docs/nasa_data_sources.md
+
+## 👥 Team
+**Stellar Minds**
+
+## 📝 License
+MIT License - Built for NASA Space Apps Challenge 2025
+---
+**Built with ❤️ for NASA Space Apps Challenge 2025*
