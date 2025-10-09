@@ -6,12 +6,6 @@
 
 WeatherWise is a dual-mode weather intelligence platform that transforms NASA Earth observation data into actionable probability-based forecasts for long-term planning and short-term decision-making.
 
-## 🎥 Demo Video
-[Link to your video - add after upload]
-
-## 🚀 Live Demo
-[Link to deployed app - if you deploy]
-
 ## 📊 Features
 
 - **Planning Mode**: 20+ years of NASA satellite data analysis for long-term planning
